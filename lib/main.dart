@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:scratch_app/category_route.dart';
 
-void main() => runApp(UnitConverterApp());
+void main() => runApp(MyApp());
 
-class UnitConverterApp extends StatelessWidget{
+class MyApp extends StatelessWidget{
   @override
   Widget build (BuildContext context){
     return MaterialApp(
