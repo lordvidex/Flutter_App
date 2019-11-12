@@ -1,5 +1,6 @@
 //Converter Route..
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:scratch_app/unit.dart';
 import 'package:meta/meta.dart';
 
@@ -8,7 +9,7 @@ import 'package:meta/meta.dart';
 /// Currently it just displays a list of mock units
 ///
 
-class ConverterRoute extends StatelessWidget{
+class ConverterRoute extends StatefulWidget{
   final ColorSwatch color;
   final List<Unit> units;
 
@@ -17,13 +18,18 @@ class ConverterRoute extends StatelessWidget{
      @required this.color,
   }):assert(units!=null),
   assert(color!= null);
-
+  @override
+  _ConverterRouteState createState() => _ConverterRouteState();
+}
+/// State class for the ConverterRoute
+/// 
+class _ConverterRouteState extends State<ConverterRoute>{
   @override
   Widget build(BuildContext context){
     //A placeholder for a list of mock units
-    final unitsWidgets = units.map((Unit unit){
+    final unitsWidgets = widget.units.map((Unit unit){
       //Setting the color for the container
-      return Container(color: color,
+      return Container(color: widget.color,
       margin: EdgeInsets.all(8),
       padding: EdgeInsets.all(16),
       child: Column(
@@ -34,8 +40,7 @@ class ConverterRoute extends StatelessWidget{
       ),
       );
     }).toList();
-
-    return ListView(
+     return ListView(
       children: unitsWidgets,
     );
   }

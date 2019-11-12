@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:scratch_app/category.dart';
@@ -13,15 +12,16 @@ final _backgroundColor = Colors.green[100];
 /// a list of [Categories].
 /// While it is named CategoryRoute, a more apt na  me would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
-class CategoryRoute extends StatelessWidget {
+class CategoryRoute extends StatefulWidget {
+//This is the constructor of the class
   const CategoryRoute();
-List<Unit> _retrieveUnitList(String categoryName){
-  return List.generate(10, (int i){
-    i+=1;
-    return Unit(conversion: i.toDouble(), 
-    name: '$categoryName Unit $i',);
-  });
+  @override
+  _CategoryRouteState createState() => _CategoryRouteState();
 }
+
+class _CategoryRouteState extends State<CategoryRoute> {
+  final categories = <Category>[];
+
   static const _categoryNames = <String>[
     'Length',
     'Area',
@@ -32,6 +32,29 @@ List<Unit> _retrieveUnitList(String categoryName){
     'Energy',
     'Currency',
   ];
+  //A list that returns the Mock Units we will use for this app
+  List<Unit> _retrieveUnitList(String categoryName) {
+    return List.generate(10, (int i) {
+      i += 1;
+      return Unit(
+        conversion: i.toDouble(),
+        name: '$categoryName Unit $i',
+      );
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    for (var i = 0; i < _categoryNames.length; i++) {
+      categories.add(Category(
+        color: _baseColors[i],
+        name: _categoryNames[i],
+        iconLocation: Icons.computer,
+        units: _retrieveUnitList(_categoryNames[i]),
+      ));
+    }
+  }
 
   static const _baseColors = <Color>[
     Colors.teal,
@@ -56,17 +79,6 @@ List<Unit> _retrieveUnitList(String categoryName){
 
   @override
   Widget build(BuildContext context) {
-    final categories = <Category>[];
-
-    for (var i = 0; i < _categoryNames.length; i++) {
-      categories.add(Category(
-        name: _categoryNames[i],
-        color: _baseColors[i],
-        iconLocation: Icons.cake,
-        units: _retrieveUnitList(_categoryNames[i]),
-      ));
-    }
-
     final listView = Container(
       color: _backgroundColor,
       padding: EdgeInsets.symmetric(horizontal: 8.0),
