@@ -52,13 +52,15 @@ class Category extends StatelessWidget {
             style: Theme.of(context).textTheme.display1,
             ),
             centerTitle: true,
-            backgroundColor: color[100],
+            backgroundColor: color,
             
           ),
           body: ConverterRoute(
             units: units,
             color: color,
           ),
+          //This prevents the keyboard to resize the screen 
+          //when it is opened
           resizeToAvoidBottomInset: false,
         );
       }
@@ -81,8 +83,8 @@ class Category extends StatelessWidget {
         height: _rowHeight,
         child: InkWell(
           borderRadius: _borderRadius,
-          highlightColor: color,
-          splashColor: color,
+          highlightColor: color['highlight'],
+          splashColor: color['splash'],
           // We can use either the () => function() or the () { function(); }
           // syntax.
           onTap: () {
